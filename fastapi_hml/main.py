@@ -1,13 +1,9 @@
 from fastapi import FastAPI
-from typing import List, Dict, Any
+from data import AFazer
+from typing import List
 from models.models import ModeloDoItem
 
-todo: List[Dict[str, Any]] = [
-    {"id":1, "titulo":"Fazer live", "descricao":"Fazer live no canal do Edu"},
-    {"id":2, "titulo":"Ligar Streaming", "status":"A Fazer"},
-    {"id":3, "titulo":"Pentear o cabelo", "status":"A Fazer"}
-]
-
+a_fazer = AFazer()
 app = FastAPI()
 
 @app.get("/")
@@ -22,4 +18,11 @@ def listar_a_fazer():
     """
     View que retorna lista de itens a fazer
     """
-    return todo
+    return a_fazer.listar()
+
+@app.post("/a-fazer", response_model=ModeloDoItem, status_code=201)
+def inserir_a_fazer(item_a_inserir: ModeloDoItem):
+    """
+    View que insere item na lista a de intens a fazer
+    """
+    return a_fazer.inserir(item_a_inserir.dict())
