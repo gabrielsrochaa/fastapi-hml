@@ -10,6 +10,9 @@ packages = [{include = "fastapi_hml"}]
 python = "^3.10"
 fastapi = "^0.101.1"
 uvicorn = "^0.23.2"
+pytest = "^7.4.0"
+requests = "^2.31.0"
+httpx = "^0.24.1"
 
 
 [build-system]
